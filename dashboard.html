@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Menu button for smaller screens -->
+        <button class="menu-btn" id="menu-btn">☰ Menu</button>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">HSBC</div>
+            <nav class="menu">
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="accounts.html">Accounts</a>
+                <a href="transfers.html">Transfers</a>
+                <a href="payments.html">Payments</a>
+                <a href="transactions.html">Transactions</a>
+                <a href="settings.html">Settings</a>
+                <a href="support.html">Support</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="user-profile">
+                    <span class="user-name">Jake Daniels</span>
+                    <button class="logout-btn" id="logout-btn">Logout</button>
+                </div>
+            </header>
+
+            <!-- Overview Section -->
+            <section class="overview">
+                <div class="card balance-card">
+                    <h3>Total Balance</h3>
+                    <p>£900,000.00</p>
+                </div>
+                <div class="card recent-transactions">
+                    <h3>Recent Transactions</h3>
+                    <ul>
+                        <li>Transfer to Savings - £500</li>
+                        <li>Payment from Employer - £3,000</li>
+                        <li>Bill Payment - £150</li>
+                    </ul>
+                </div>
+                <div class="card quick-actions">
+                    <h3>Quick Actions</h3>
+                    <a href="transfers.html" class="quick-action-btn">Transfer Funds</a>
+                    <a href="payments.html" class="quick-action-btn">Pay Bills</a>
+                </div>
+            </section>
+
+            <!-- Accounts Section -->
+            <section class="accounts">
+                <h2>My Accounts</h2>
+                <div class="account-card">
+                    <h4>Checking Account</h4>
+                    <p>Balance: £400,000.00</p>
+                </div>
+                <div class="account-card">
+                    <h4>Savings Account</h4>
+                    <p>Balance: £500,000.00</p>
+                </div>
+            </section>
+
+            <!-- Transfer Section -->
+            <section class="transfers">
+                <h2>Transfer Funds</h2>
+                <button id="transfer-btn">Transfer</button>
+            </section>
+
+            <!-- Transaction History -->
+            <section class="transactions">
+                <h2>Transaction History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01/09/2024</td>
+                            <td>Transfer to Savings</td>
+                            <td>£500</td>
+                        </tr>
+                        <tr>
+                            <td>01/09/2024</td>
+                            <td>Payment from Employer</td>
+                            <td>£3,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        menuBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+        });
+
+        logoutBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

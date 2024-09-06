@@ -1,0 +1,69 @@
+<!-- accounts.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Accounts</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+         <!-- Menu button for smaller screens -->
+         <button class="menu-btn" id="menu-btn">☰ Menu</button>
+
+         <!-- Sidebar -->
+         <aside class="sidebar" id="sidebar">
+             <div class="logo">HSBC</div>
+             <nav class="menu">
+                 <a href="dashboard.html" class="active">Dashboard</a>
+                 <a href="accounts.html">Accounts</a>
+                 <a href="transfers.html">Transfers</a>
+                 <a href="payments.html">Payments</a>
+                 <a href="transactions.html">Transactions</a>
+                 <a href="settings.html">Settings</a>
+                 <a href="support.html">Support</a>
+             </nav>
+         </aside>
+ 
+         <!-- Main Content -->
+         <main class="main-content">
+             <!-- Header -->
+             <header class="header">
+                 <div class="user-profile">
+                     <span class="user-name">Jake Daniels</span>
+                     <button class="logout-btn" id="logout-btn">Logout</button>
+                 </div>
+             </header>
+
+        <main class="main-content">
+            <!-- Accounts Section -->
+            <section class="accounts">
+                <h2>My Accounts</h2>
+                <div class="account-card">
+                    <h4>Checking Account</h4>
+                    <p>Balance: £400,000.00</p>
+                </div>
+                <div class="account-card">
+                    <h4>Savings Account</h4>
+                    <p>Balance: £500,000.00</p>
+                </div>
+            </section>
+        </main>
+    </div>
+     <!-- JavaScript -->
+     <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        menuBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+        });
+
+        logoutBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

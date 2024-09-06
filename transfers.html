@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Transfers</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px; /* Limit the size */
+            text-align: center;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: red;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* Show the modal when active */
+        .modal.show {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Menu button for smaller screens -->
+        <button class="menu-btn" id="menu-btn">☰ Menu</button>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">HSBC</div>
+            <nav class="menu">
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="accounts.html">Accounts</a>
+                <a href="transfers.html">Transfers</a>
+                <a href="payments.html">Payments</a>
+                <a href="transactions.html">Transactions</a>
+                <a href="settings.html">Settings</a>
+                <a href="support.html">Support</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="user-profile">
+                    <span class="user-name">Jake Daniels</span>
+                    <button class="logout-btn" id="logout-btn">Logout</button>
+                </div>
+            </header>
+
+            <section class="transfers">
+                <h2>Transfer Funds</h2>
+                <form id="transfer-form">
+                    <label for="from-account">From Account:</label>
+                    <select id="from-account" required>
+                        <option value="" disabled selected>Select account</option>
+                        <option value="checking">Checking - £400,000.00</option>
+                        <option value="savings">Savings - £500,000.00</option>
+                    </select>
+
+                    <button type="submit">Transfer</button>
+                </form>
+
+                <div id="transfer-confirmation" class="confirmation-message"></div>
+            </section>
+        </main>
+
+        <!-- Modal for Destination Bank Details -->
+        <div id="destination-modal" class="modal">
+            <div class="modal-content">
+                <h2>Enter Destination Bank Details</h2>
+                <form id="destination-form">
+                    <label for="bank-name">Bank Name:</label>
+                    <input type="text" id="bank-name" placeholder="Enter bank name" required>
+
+                    <label for="account-number">Account Number:</label>
+                    <input type="text" id="account-number" placeholder="Enter account number" required>
+
+                    <button type="submit">Initiate Transfer</button>
+                    <div id="destination-error" class="error-message hidden"></div> <!-- Error message here -->
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal for Authentication Code -->
+        <div id="auth-modal" class="modal">
+            <div class="modal-content">
+                <h2>Enter Authentication Code</h2>
+                <form id="auth-form">
+                    <label for="auth-code">Authentication Code:</label>
+                    <input type="text" id="auth-code" placeholder="Enter code" required>
+                    <button type="submit">Verify</button>
+                    <div id="auth-error" class="error-message hidden"></div> <!-- Error message here -->
+                </form>
+            </div>
+        </div>
+
+        <!-- JavaScript -->
+        <script>
+            const transferForm = document.getElementById('transfer-form');
+            const destinationForm = document.getElementById('destination-form');
+            const authForm = document.getElementById('auth-form');
+            const transferConfirmation = document.getElementById('transfer-confirmation');
+            const destinationModal = document.getElementById('destination-modal');
+            const authModal = document.getElementById('auth-modal');
+            const destinationError = document.getElementById('destination-error');
+            const authError = document.getElementById('auth-error');
+
+            // Show destination modal after pressing Transfer button
+            transferForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const fromAccount = document.getElementById('from-account').value;
+
+                if (fromAccount) {
+                    destinationModal.classList.add('show'); // Show the modal
+                } else {
+                    transferConfirmation.textContent = 'Transfer failed. Please select an account.';
+                }
+            });
+
+            // Show authentication modal after submitting destination bank details
+            destinationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const bankName = document.getElementById('bank-name').value;
+                const accountNumber = document.getElementById('account-number').value;
+
+                // Validate bank name (only alphabets)
+                if (/^[A-Za-z\s]+$/.test(bankName) && /^[0-9]+$/.test(accountNumber)) {
+                    destinationModal.classList.remove('show'); // Hide destination modal
+                    authModal.classList.add('show'); // Show authentication modal
+                    destinationError.classList.add('hidden'); // Hide error message if previously shown
+                } else {
+                    destinationError.textContent = 'Invalid input! Please check the bank name or account number.';
+                    destinationError.classList.remove('hidden'); // Show error message
+                }
+            });
+
+            // Verify authentication code
+            authForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const authCode = document.getElementById('auth-code').value;
+
+                if (authCode === '669927') {
+                    authError.textContent = 'Transfer initiation failed. Please contact support.'; // Same error styling
+                    authError.classList.remove('hidden'); // Show the error
+                } else {
+                    authError.textContent = 'Invalid authentication code!';
+                    authError.classList.remove('hidden'); // Show error message
+                }
+            });
+
+            // Prevent numbers from being entered in the bank name field
+            document.getElementById('bank-name').addEventListener('input', function(e) {
+                const value = e.target.value;
+                e.target.value = value.replace(/[^A-Za-z\s]/g, ''); // Allow only letters and spaces
+            });
+
+            // Prevent letters from being entered in the account number field
+            document.getElementById('account-number').addEventListener('input', function(e) {
+                const value = e.target.value;
+                e.target.value = value.replace(/[^0-9]/g, ''); // Allow only numbers
+            });
+
+            // Menu and logout functionality
+            const menuBtn = document.getElementById('menu-btn');
+            const sidebar = document.getElementById('sidebar');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            menuBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+            });
+
+            logoutBtn.addEventListener('click', function() {
+                window.location.href = 'login.html';
+            });
+        </script>
+    </div>
+</body>
+</html>

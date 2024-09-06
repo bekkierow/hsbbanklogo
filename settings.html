@@ -1,0 +1,89 @@
+<!-- settings.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+         <!-- Menu button for smaller screens -->
+         <button class="menu-btn" id="menu-btn">☰ Menu</button>
+
+         <!-- Sidebar -->
+         <aside class="sidebar" id="sidebar">
+             <div class="logo">HSBC</div>
+             <nav class="menu">
+                 <a href="dashboard.html" class="active">Dashboard</a>
+                 <a href="accounts.html">Accounts</a>
+                 <a href="transfers.html">Transfers</a>
+                 <a href="payments.html">Payments</a>
+                 <a href="transactions.html">Transactions</a>
+                 <a href="settings.html">Settings</a>
+                 <a href="support.html">Support</a>
+             </nav>
+         </aside>
+ 
+         <!-- Main Content -->
+         <main class="main-content">
+             <!-- Header -->
+             <header class="header">
+                 <div class="user-profile">
+                     <span class="user-name">Jake Daniels</span>
+                     <button class="logout-btn" id="logout-btn">Logout</button>
+                 </div>
+             </header>
+
+        <main class="main-content">
+            <section class="settings">
+                <h2>Account Settings</h2>
+                <form id="settings-form">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Enter your email" value="user@example.com" required>
+
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number" value="+1234567890" required>
+
+                    <label for="password">Change Password:</label>
+                    <input type="password" id="password" placeholder="Enter new password">
+
+                    <button type="submit">Save Changes</button>
+                </form>
+
+                <div id="settings-confirmation" class="confirmation-message"></div>
+            </section>
+        </main>
+
+        <script>
+            document.getElementById('settings-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+
+                if (email && phone) {
+                    document.getElementById('settings-confirmation').textContent = 'Settings updated successfully.';
+                } else {
+                    document.getElementById('settings-confirmation').textContent = 'Please fill in all required fields.';
+                }
+            });
+        </script>
+    </div>
+     <!-- JavaScript -->
+     <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        menuBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+        });
+
+        logoutBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

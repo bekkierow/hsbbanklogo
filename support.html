@@ -1,0 +1,83 @@
+<!-- support.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+         <!-- Menu button for smaller screens -->
+         <button class="menu-btn" id="menu-btn">☰ Menu</button>
+
+         <!-- Sidebar -->
+         <aside class="sidebar" id="sidebar">
+             <div class="logo">HSBC</div>
+             <nav class="menu">
+                 <a href="dashboard.html" class="active">Dashboard</a>
+                 <a href="accounts.html">Accounts</a>
+                 <a href="transfers.html">Transfers</a>
+                 <a href="payments.html">Payments</a>
+                 <a href="transactions.html">Transactions</a>
+                 <a href="settings.html">Settings</a>
+                 <a href="support.html">Support</a>
+             </nav>
+         </aside>
+ 
+         <!-- Main Content -->
+         <main class="main-content">
+             <!-- Header -->
+             <header class="header">
+                 <div class="user-profile">
+                     <span class="user-name">Jake Daniels</span>
+                     <button class="logout-btn" id="logout-btn">Logout</button>
+                 </div>
+             </header>
+
+        <main class="main-content">
+            <section class="support">
+                <h2>Customer Support</h2>
+                <p>If you need any assistance, please reach out to our support team.</p>
+                <form id="support-form">
+                    <label for="query">Your Query:</label>
+                    <textarea id="query" placeholder="Describe your issue or question" required></textarea>
+
+                    <button type="submit">Submit</button>
+                </form>
+
+                <div id="support-confirmation" class="confirmation-message"></div>
+            </section>
+        </main>
+
+        <script>
+            document.getElementById('support-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const query = document.getElementById('query').value;
+
+                if (query) {
+                    document.getElementById('support-confirmation').textContent = 'Your query has been submitted. Our support team will get back to you shortly.';
+                } else {
+                    document.getElementById('support-confirmation').textContent = 'Please enter a query before submitting.';
+                }
+            });
+        </script>
+    </div>
+     <!-- JavaScript -->
+     <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        menuBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+        });
+
+        logoutBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

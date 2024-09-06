@@ -1,0 +1,91 @@
+<!-- payments.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Menu button for smaller screens -->
+        <button class="menu-btn" id="menu-btn">☰ Menu</button>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">HSBC</div>
+            <nav class="menu">
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="accounts.html">Accounts</a>
+                <a href="transfers.html">Transfers</a>
+                <a href="payments.html">Payments</a>
+                <a href="transactions.html">Transactions</a>
+                <a href="settings.html">Settings</a>
+                <a href="support.html">Support</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="user-profile">
+                    <span class="user-name">Jake Daniels</span>
+                    <button class="logout-btn" id="logout-btn">Logout</button>
+                </div>
+            </header>
+
+        <main class="main-content">
+            <section class="payments">
+                <h2>Make a Payment</h2>
+                <form id="payment-form">
+                    <label for="bill">Bill:</label>
+                    <select id="bill" required>
+                        <option value="" disabled selected>Select a bill to pay</option>
+                        <option value="electricity">Electricity</option>
+                        <option value="water">Water</option>
+                        <option value="internet">Internet</option>
+                    </select>
+
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" placeholder="$0.00" required min="1" max="5000">
+
+                    <button type="submit">Pay Bill</button>
+                </form>
+
+                <div id="payment-confirmation" class="confirmation-message"></div>
+            </section>
+        </main>
+
+        <script>
+            document.getElementById('payment-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const bill = document.getElementById('bill').value;
+                const amount = parseFloat(document.getElementById('amount').value);
+
+                if (bill && amount > 0) {
+                    document.getElementById('payment-confirmation').textContent = `Successfully paid $${amount.toFixed(2)} for ${bill}.`;
+                } else {
+                    document.getElementById('payment-confirmation').textContent = 'Payment failed. Please check your inputs.';
+                }
+            });
+        </script>
+    </div>
+     <!-- JavaScript -->
+     <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        menuBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+        });
+
+        logoutBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>
