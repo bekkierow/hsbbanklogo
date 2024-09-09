@@ -17,7 +17,7 @@ body {
 /* Sidebar Styling */
 .sidebar {
     width: 250px;
-    background-color: #002e5d;
+    background-color: red;
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -46,7 +46,7 @@ body {
 
 .menu a.active,
 .menu a:hover {
-    background-color: #00509e;
+    background-color: #e74c3c;
 }
 
 /* Main Content Styling */
